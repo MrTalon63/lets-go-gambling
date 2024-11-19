@@ -3,6 +3,7 @@ import { EmbedBuilder } from "discord.js";
 import { RunFunction } from "../../interfaces/commands";
 
 export const run: RunFunction = async (client, message, args) => {
+	const loadingMessage = await message.reply("<a:loading_blocks:1308549135951073340>");
 	const prompt = args.join(" ");
 	if (!prompt) {
 		message.channel.send("Podaj tekst do przetworzenia.");
@@ -34,7 +35,7 @@ export const run: RunFunction = async (client, message, args) => {
 			iconURL: message.author.displayAvatarURL(),
 		});
 
-	message.channel.send({ embeds: [embed] });
+	loadingMessage.edit({ embeds: [embed], content: "" });
 };
 
 export const name = "llm";
