@@ -28,10 +28,10 @@ class Bot extends Client {
 	}
 
 	public async start(): Promise<void> {
-		this.log.debug("Logging in with token...");
+		this.log.info("Logging in with token...");
 		this.login(process.env.TOKEN);
 
-		this.log.debug("Loading commands and events...");
+		this.log.info("Loading commands...");
 		const commandFiles: string[] = await glob(`${__dirname}/commands/**/*.ts`);
 		commandFiles.map(async (fileName: string) => {
 			const filePath = path.resolve(fileName);
@@ -40,6 +40,7 @@ class Bot extends Client {
 			if (file.aliases) file.aliases.map((alias) => this.commands.set(alias, file));
 		});
 
+		this.log.info("Loading events...");
 		const eventFiles: string[] = await glob(`${__dirname}/events/**/*.ts`);
 		eventFiles.map(async (fileName: string) => {
 			const filePath = path.resolve(fileName);
@@ -48,7 +49,7 @@ class Bot extends Client {
 			this.on(file.event, file.run.bind(this, this));
 		});
 
-		this.log.debug("Initialization complete!");
+		this.log.info("Initialization complete!");
 	}
 
 	public getUserFromMention(mention: string): User | undefined {
