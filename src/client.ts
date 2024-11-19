@@ -33,7 +33,6 @@ class Bot extends Client {
 
 		this.log.info("Loading commands...");
 		const commandFiles: string[] = await glob(`${__dirname}/commands/**/*{.ts,.js}`);
-		console.log(commandFiles);
 		commandFiles.map(async (fileName: string) => {
 			const filePath = path.resolve(fileName);
 			const file: Command = await import(filePath);
