@@ -1,8 +1,9 @@
 import Bot from "./client";
+import logger from "./utils/logger";
 
-console.info("Starting bot...");
+logger.info("[Discord.js] Starting bot...");
 const client = new Bot();
 client.start().catch((error) => {
-	console.error(error);
+	logger.error(error);
 	process.exit(1);
 });

@@ -2,6 +2,7 @@ import { Client, Collection, GatewayIntentBits, User, Options } from "discord.js
 import { glob } from "glob";
 
 import db from "./utils/db";
+import logger from "./utils/logger";
 
 import { Command } from "./interfaces/commands";
 import { Event } from "./interfaces/events";
@@ -15,7 +16,7 @@ class Bot extends Client {
 	public readonly version = pkg.version;
 	public readonly prefix = process.env.PREFIX!;
 	public readonly owner = process.env.OWNER;
-	public log = console;
+	public log = logger;
 	public db = db;
 
 	public constructor() {
