@@ -14,16 +14,20 @@ export const run: RunFunction = async (client, message, args) => {
 	try {
 		req = await fetch(`https://text.pollinations.ai/${prompt}`);
 	} catch {
-		message.reply("Wystąpił błąd podczas generowania odpowiedzi");
+		loadingMessage.edit("Wystąpił błąd podczas generowania odpowiedzi");
 		return;
 	}
 
 	if (!req.ok) {
-		message.reply("Wystąpił błąd podczas generowania odpowiedzi");
+		loadingMessage.edit("Wystąpił błąd podczas generowania odpowiedzi");
 		return;
 	}
 
 	const res = await req.text();
+	if (!res) {
+		loadingMessage.edit("Wystąpił błąd podczas generowania odpowiedzi");
+		return;
+	}
 
 	const embed = new EmbedBuilder()
 		.setColor("Blue")
