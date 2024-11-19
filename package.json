@@ -1,0 +1,31 @@
+{
+	"name": "lets-go-gambling",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon --ignore 'data/*.json' -r dotenv/config src/index.ts",
+		"build": "tsc",
+		"start": "node dist/index.js"
+	},
+	"keywords": [],
+	"author": "MrTalon63 <marcin@mczop.eu>",
+	"license": "MIT",
+	"dependencies": {
+		"discord.js": "^14.16.3",
+		"glob": "^11.0.0",
+		"korwinjs": "^1.0.0",
+		"pg": "^8.13.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.15.0",
+		"@types/node": "^22.9.0",
+		"@types/pg": "^8.11.10",
+		"dotenv": "^16.4.5",
+		"eslint": "^9.15.0",
+		"nodemon": "^3.1.7",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.6.3",
+		"typescript-eslint": "^8.15.0"
+	}
+}
