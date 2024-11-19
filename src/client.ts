@@ -34,6 +34,7 @@ class Bot extends Client {
 		this.log.info("Loading commands...");
 		const commandFiles: string[] = await glob(`${__dirname}/commands/**/*.ts`);
 		commandFiles.map(async (fileName: string) => {
+			console.debug(`Registering command: ${fileName}`);
 			const filePath = path.resolve(fileName);
 			const file: Command = await import(filePath);
 			this.commands.set(file.name, file);
@@ -43,6 +44,7 @@ class Bot extends Client {
 		this.log.info("Loading events...");
 		const eventFiles: string[] = await glob(`${__dirname}/events/**/*.ts`);
 		eventFiles.map(async (fileName: string) => {
+			console.debug(`Registering event: ${fileName}`);
 			const filePath = path.resolve(fileName);
 			const file: Event = await import(filePath);
 			this.events.set(file.name, file);
