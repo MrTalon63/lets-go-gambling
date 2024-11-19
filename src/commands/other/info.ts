@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 
-import { RunFunction } from "../interfaces/commands";
+import { RunFunction } from "../../interfaces/commands";
 
 export const run: RunFunction = async (client, message) => {
 	const embed = new EmbedBuilder()

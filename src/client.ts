@@ -1,5 +1,6 @@
 import { Client, Collection, GatewayIntentBits, User, Options } from "discord.js";
 import { glob } from "glob";
+import path from "path";
 
 import db from "./utils/db";
 import logger from "./utils/logger";
@@ -31,16 +32,18 @@ class Bot extends Client {
 		this.login(process.env.TOKEN);
 
 		this.log.debug("Loading commands and events...");
-		const commandFiles: string[] = await glob(`${__dirname}/commands/**/*{.ts,.js}`);
+		const commandFiles: string[] = await glob(`${__dirname}/commands/**/*.ts`);
 		commandFiles.map(async (fileName: string) => {
-			const file: Command = await import(`../${fileName}`);
+			const filePath = path.resolve(fileName);
+			const file: Command = await import(filePath);
 			this.commands.set(file.name, file);
 			if (file.aliases) file.aliases.map((alias) => this.commands.set(alias, file));
 		});
 
-		const eventFiles: string[] = await glob(`${__dirname}/events/**/*{.ts,.js}`);
+		const eventFiles: string[] = await glob(`${__dirname}/events/**/*.ts`);
 		eventFiles.map(async (fileName: string) => {
-			const file: Event = await import(`../${fileName}`);
+			const filePath = path.resolve(fileName);
+			const file: Event = await import(filePath);
 			this.events.set(file.name, file);
 			this.on(file.event, file.run.bind(this, this));
 		});
